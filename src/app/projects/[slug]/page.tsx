@@ -2,7 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import { projects } from '../../../data/projects';
 
-export default function ProjectDetailPage({ params }: { params: { slug: string } }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function Page({ params }: any) {
   const project = projects.find((p) => p.slug === params.slug);
   if (!project) {
     return (
@@ -33,4 +34,8 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
       <div className="mb-2"><strong>Final Outcome:</strong> {project.outcome}</div>
     </main>
   );
+}
+
+export async function generateStaticParams() {
+  return projects.map((project) => ({ slug: project.slug }));
 } 

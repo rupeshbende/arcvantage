@@ -2,7 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import { blogPosts } from '../../../data/blogPosts';
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function Page({ params }: any) {
   const post = blogPosts.find((p) => p.slug === params.slug);
   if (!post) {
     return (
@@ -20,4 +21,8 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
       <div className="text-lg text-gray-700">{post.content}</div>
     </main>
   );
+}
+
+export async function generateStaticParams() {
+  return blogPosts.map((post) => ({ slug: post.slug }));
 } 
